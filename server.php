@@ -14,8 +14,10 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $config['smtp_user']; //'david.piruzashvili@gmail.com'
-    $mail->Password = $config['smtp_password'];  //srbn iqse youp wahl
+    $mail->Username = getenv('SMTP_USER'); 
+    $mail->Password = getenv('SMTP_PASSWORD');  
+    // $mail->Username = $config['smtp_user']; 
+    // $mail->Password = $config['smtp_password'];  
     $mail->SMTPSecure = 'ssl'; //ssl
     $mail->Port = 465; //465
 
