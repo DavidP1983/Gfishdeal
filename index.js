@@ -24,9 +24,26 @@ document.getElementById('form').addEventListener('submit', function (event) {
     const formData = new FormData(this);
 
     function createPhoneNumber(numbers) {
-        const arr = numbers.split(',');
-        const [fr, th, tr, ft] = arr.join('').match(/(\d{3})|(\d+)/g);
-        return `+(${fr}) ${th}-${tr}-${ft}`
+        let count = 0;
+        let str = '';
+        const arr = [];
+        for (let i = 0; i < numbers.length; i++) {
+            count++;
+            str += numbers[i];
+            if (count === 3 && i <= 6) {
+                arr.push(str);
+                str = '';
+                count = 0;
+            }
+            if (count === 2 && i > 6) {
+                arr.push(str);
+                str = '';
+                count = 0;
+
+            }
+        }
+        const [code, operator, num1, num2, num3] = arr;
+        return `+${code} (${operator}) ${num1}-${num2}-${num3}`
     }
 
 
@@ -44,7 +61,7 @@ document.getElementById('form').addEventListener('submit', function (event) {
     spinner.style.display = 'block';
 
 
-    fetch('/', {
+    fetch('server.php', {
         method: 'POST',
         headers: { 'Content-type': "application/json" },
         body: JSON.stringify(obj),
