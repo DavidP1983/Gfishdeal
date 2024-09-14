@@ -35,7 +35,9 @@ try {
 
         // Отправитель
         $mail->setFrom($email);
-        $mail->addAddress('david.piruzashvili@gmail.com'); // Кому отправляем
+        $mail->addAddress('Кому отправляем');// Кому отправляем
+
+        // Кому отправляем
 
         // Тело письма
         $mail->isHTML(true);
